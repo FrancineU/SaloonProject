@@ -7,35 +7,65 @@
     <title>HAIRSTYLE</title>
 </head>
 <body>
-    <h2>Hairstyle</h2>
-    <form action="/hairstyle" method="post">
-        <input type="text" name="name" placeholder="Enter Hairstyle Name" required />
-        <select name="cars" id="cars">
-           <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-           <option value="audi">Audi</option>
-        </select> 
-        <button type="submit">Save Hairstyle</button>
-    </form>
-    <hr>
-    <table border="1">
-        <thead>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Saloon ID</th>
-            <th></th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Ordinaire</td>
-                <td>Sarah's Saloon</td>
-                <td>
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<h2>Hairstyle</h2>
+        @if(isset($updatingValues))
+        <form action="/hairstyle/{{ $updatingValues->id }}/update" method="post">
+            @csrf
+            <input
+                type="text"
+                name="name"
+                value="{{ $updatingValues->name }}"
+                placeholder="Enter Hairstyle Name"
+                required
+            />
+            <select name="saloon_id" required>
+                @foreach ($saloons as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+            <button type="submit">Update Hairstyle</button>
+        </form>
+        @else
+        <form action="/hairstyle" method="post">
+            @csrf
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter Hairstyle Name"
+                required
+            />
+            <select name="saloon_id" required>
+                @foreach ($saloonValues as $item)
+                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endforeach
+            </select>
+            <button type="submit">Save Hairstyle</button>
+        </form>
+        @endif
+        <hr />
+
+        <table border="1">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Saloon</th>
+                <th>Timestamps</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach($saloonValues as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ \App\Models\Saloon::find($item->saloon_id)->name }}</td>
+                    <td>{{ $item->created_at }}</td>
+                    <td>
+                        <a href="/saloon/{{ $item->id }}/update">Update</a> |
+                        <a href="/saloon/{{ $item->id }}/delete">Delete</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 </body>
 </html>

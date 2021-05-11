@@ -13,21 +13,23 @@ class Hairstyle extends Migration
      */
     public function up()
     {
-        Schema::create('hairstyles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('saloon_id');
-            $table->timestamps();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('hairstyles');
-    }
+        public function up()
+        {
+            Schema::create('hairstyles', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->foreignId('saloon_id');
+                $table->timestamps();
+            });
+        }
+    
+        /**
+         * Reverse the migrations.
+         *
+         * @return void
+         */
+        public function down()
+        {
+            Schema::dropIfExists('hairstyles');
+        }
 }

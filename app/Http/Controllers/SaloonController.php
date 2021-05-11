@@ -48,5 +48,4 @@ class SaloonController extends Controller {
 
         return redirect()->back();
     }
-
 }

@@ -11,3 +11,7 @@ Route::post('/saloon/{id}/update', [SaloonController::class, 'saveUpdate']);
 Route::get('/saloon/{id}/delete', [SaloonController::class, 'delete']);
 
 Route::get('/hairstyle', [HairstyleController::class, 'home']);
+Route::post('/hairstyle', [HairstyleController::class, 'save']);
+Route::get('/hairstyle/{id}/update', [HairstyleController::class, 'update']);
+Route::post('/hairstyle/{id}/update', [HairstyleController::class, 'saveUpdate']);
+Route::get('/hairstyle/{id}/delete', [HairstyleController::class, 'delete']);

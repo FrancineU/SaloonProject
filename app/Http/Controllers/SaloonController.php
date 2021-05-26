@@ -7,18 +7,23 @@ use Illuminate\Http\Request;
 use App\Models\Saloon;
 
 class SaloonController extends Controller {
-    public function home () {
+    public function allSaloons () {
         $saloons = Saloon::get();
 
-        return view('saloon', [
+        return view('saloons', [
             'saloonValues' => $saloons
         ]);
     }
 
-    public function save (REQUEST $request) {
+    public function addNew (){
+        return view('addNewSaloon');
+    }
 
+    public function saveNew (REQUEST $request) {
         $salon = new Saloon();
         $salon->name = $request->name;
+        $salon->location=$request->location;
+        $salon->services=$request->services;
         $salon->save();
 
         return redirect()->back();
@@ -36,7 +41,11 @@ class SaloonController extends Controller {
 
     public function saveUpdate (REQUEST $request, $id) {
         $salon = Saloon::find($id);
+
         $salon->name = $request->name;
+        $salon->location=$request->location;
+        $salon->services=$request->services;
+
         $salon->save();
 
         return redirect('/saloon');

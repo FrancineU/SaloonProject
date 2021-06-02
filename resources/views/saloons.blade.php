@@ -14,16 +14,16 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                @foreach($saloonValues as $item)
+                @foreach($saloons as $saloon)
                 <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->location }}</td>
-                    <td>{{ $item->services }}</td>
-                    <td>{{ $item->created_at }}</td>
+                    <td>{{ $saloon->id }}</td>
+                    <td>{{ $saloon->name }}</td>
+                    <td>{{ $saloon->location }}</td>
+                    <td>{{ $saloon->services }}</td>
+                    <td>{{ $saloon->created_at }}</td>
                     <td>
-                        <a href="/saloon/{{ $item->id }}/update" class="btn btn-primary">Update</a>
-                        <a href="/saloon/{{ $item->id }}/delete" class="btn btn-danger">Delete</a>
+                        <a href="/saloon/{{ $saloon->id }}/update" class="btn btn-primary">Update</a>
+                        <a href="/saloon/{{ $saloon->id }}/delete" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
                 @endforeach
